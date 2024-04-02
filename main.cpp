@@ -16,20 +16,32 @@ int main(){
         if(com.compare("list")){
 
         }
-        if(com.compare("add")){
-            cout<<"type: (int, double, string, array): ";
+        else if(com.compare("add")){
             Entry ent;
-            cin>>ent.type;
-            add(data, ent)
+            cout<<"key: ";
+            cin>>ke;
+            cout<<"type (int, double, string, array): ";
+            cin>>ty;
+            cout<<"value: ";
+            cin>>val;
+            if(ty.compare("int")){
+                add(data, create(INT, ke, val));
+            }
+            // else if(ty.compare(double))
+            //     add(data, DOUBLE, val);
+            // else if(ty.compare(string))
+            //     add(data, STRING, val);
+            // else if(ty.compare(array))
+            //     add(data, ARRAY, val);
         }
-        if(com.compare("get")){
+        else if(com.compare("get")){
 
         }
-        if(com.compare("del")){
+        else if(com.compare("del")){
 
         }
 
-        if(com.compare("exit")){
+        else if(com.compare("exit")){
             destroy(data);
             break;
         }
