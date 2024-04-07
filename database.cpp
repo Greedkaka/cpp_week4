@@ -41,7 +41,8 @@ Array* cre_Arr(int count){
         arr->items=&arri[0];
         for(int i=0; i<arr->size; i++){
             cout<<"item["<<i<<"]: ";
-            getline(cin,arri[i]);
+            // getline(cin,arri[i]);
+            cin>>arri[i];
         } 
     }
     else if(typ.compare("array")==0){
@@ -74,7 +75,7 @@ void get_Arr(Array* arr){
     }
     if(arr->type==STRING){
         for (int i = 0; i < arr->size; i++){
-            cout<<*(string*)(arr->items+i);
+            cout<<(string*)arr->items+i;
             if(i<arr->size-1)
                 cout<<", ";
         }
@@ -94,7 +95,7 @@ Entry *create(Type type, std::string key, void *value){
     Entry* ent=new Entry;
     ent->type=type;
     ent->key=key;
-    ent->value=new void*;
+    // ent->value=new void*;
     ent->value=value;
 
     return ent;

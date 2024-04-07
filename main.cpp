@@ -34,7 +34,8 @@ int main(){
                 add(data, create(DOUBLE, ke, &val2));
             }
             else if(ty.compare("string")==0){
-                getline(cin,val3);
+                // getline(cin,val3);
+                cin>>val3;
                 add(data, create(STRING, ke, &val3));
             }
             else if(ty.compare("array")==0){
