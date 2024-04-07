@@ -6,16 +6,16 @@ using namespace std;
 
 int main(){
     Database data;
-    Entry* en;
     init(data);
 
     string com="", ke="", ty="", val3="";
-    int val1;
-    double val2;
+    int val1=0,k=123;
+    double val2=0;
+
     while(true){
         cout<<"command (list, add, get, del, exit): ";
         cin>>com;
-
+        // create(INT,"k",&k);
         if(com.compare("list")==0){
             list(data);
         }
@@ -34,36 +34,42 @@ int main(){
                 add(data, create(DOUBLE, ke, &val2));
             }
             else if(ty.compare("string")==0){
-                cin>>val3;
+                getline(cin,val3);
                 add(data, create(STRING, ke, &val3));
             }
-            // else if(ty.compare("array")==0){
-            //     Array arr;
-            //     cout<<"size: ";
-            //     cin>>arr.size;
-            //     item
-            //     for(int i=0; i<arr.size; i++)
-            //         a
-            //     add(data, ARRAY, arr);
-            // }
+            else if(ty.compare("array")==0){
+                add(data, create(ARRAY, ke, cre_Arr(0)));
+            }
                 
         }
         else if(com.compare("get")==0){
             cout<<"key: ";
             cin>>ke;
-            en=get(data,ke);
-            cout<<*(reinterpret_cast<int*>(en->value))<<endl;
+            Entry* m_e=get(data,ke);
+            // cout<<*(reinterpret_cast<int*>(m_e->value))<<endl;
+            if(m_e->type==INT && m_e!=nullptr)
+               cout<<ke<<": "<<*((int*)(m_e->value))<<endl;
+            else if(m_e->type==DOUBLE && m_e!=nullptr)
+               cout<<ke<<": "<<*((double*)(m_e->value))<<endl;
+            else if(m_e->type==STRING && m_e!=nullptr)
+               cout<<ke<<": "<<*((string*)(m_e->value))<<endl;
+            else if(m_e->type==ARRAY && m_e!=nullptr){
+               cout<<ke<<": ";
+               get_Arr((Array*)m_e->value);
+               cout<<endl;
+            }
         }
         else if(com.compare("del")==0){
-
+            cout<<"key: ";
+            cin>>ke;
+            remove(data,ke);
         }
 
-        else if(com.compare("exit")==0){
+        if(com.compare("exit")==0){
             destroy(data);
             break;
         }
     }
-
 
     return 0;
 }

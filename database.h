@@ -2,6 +2,7 @@
 #define DATABASE_H
 
 #include <string>
+using namespace std;
 
 enum Type { INT, DOUBLE, STRING, ARRAY };
 
@@ -13,30 +14,37 @@ struct Array {
 
 struct Entry {
   Type type;
-  std::string key;
+  string key;
   void *value;
 };
 
-struct Database {
+struct Node{
   Entry* e;
+  Node* next;
+
+  // Node() { e->key=""; e->value=nullptr; }
+  Node(){}
+  Node(Entry* d) : e(d)  { next=nullptr; }
+};
+
+struct Database {
   int count;
-  Database* next=nullptr;
+  Node* head=new Node;
   // 해당 부분만 수정하여 사용한다.
   // 다른 부분은 수정하면 안됨.
 };
 
-struct Node{
-  Database d;
-  struct Node *link;
-};
+Array* cre_Arr(int count);
+
+void get_Arr(Array* arr);
 
 // 엔트리를 생성한다.
 Entry *create(Type type, std::string key, void *value);
 
-void list(Database &database);
-
 // 데이터베이스를 초기화한다.
 void init(Database &database);
+
+void list(Database &database);
 
 // 데이터베이스에 엔트리를 추가한다.
 void add(Database &database, Entry *entry);
